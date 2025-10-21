@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aventura Aprendizaje - Mapa de la Comunidad</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos específicos para la página del juego */
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #e6ffe6; /* Fondo temático de granja/cosecha */
+            padding: 20px;
+        }
+
+        #contenedor-juego {
+            background-color: #ffffff;
+            border: 5px solid #2e8b57;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #ff6347;
+            font-size: 2.2em;
+        }
+
+        /* Botón para volver al mapa */
+        #volver-mapa {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #3b5998;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        #volver-mapa:hover {
+            background-color: #2d4373;
+        }
+
+        #area-conteo {
+            min-height: 100px;
+            margin: 20px 0;
+            border: 2px dashed #90ee90;
+            background-color: #f0fff0;
+            padding: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            gap: 10px;
+        }
+
+        .objeto-conteo {
+            user-select: none;
+        }
+
+        #opciones-numeros button {
+            background-color: #ffd700;
+            color: #333;
+            border: none;
+            padding: 15px 25px;
+            margin: 10px;
+            border-radius: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #opciones-numeros button:hover {
+            background-color: #ffaa00;
+        }
+
+        #mensaje {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 20px;
+            min-height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <a href="mapa_prototipo.html" id="volver-mapa">← Volver al Mapa</a>
+
+    <div id="contenedor-juego">
+        <h1>🌽 Cosecha y Cuenta 🍎</h1>
+        <p>¿Cuántos objetos hay en la canasta? ¡Toca el número correcto!</p>
+
+        <div id="area-conteo">
+            </div>
+
+        <div id="opciones-numeros">
+            </div>
+
+        <div id="mensaje"></div>
+    </div>
+
+    <script>
+        // Lógica de JavaScript para el mini-juego
+        const AREA_CONTEO = document.getElementById('area-conteo');
+        const OPCIONES_NUMEROS = document.getElementById('opciones-numeros');
+        const MENSAJE = document.getElementById('mensaje');
+        const OBJETOS_DISPONIBLES = ['🌽', '🍎', '🥭', '🌶️', '🥕']; 
+        let respuestaCorrecta = 0;
+
+        function generarNumeroAleatorio(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function iniciarDesafio() {
+            AREA_CONTEO.innerHTML = '';
+            OPCIONES_NUMEROS.innerHTML = '';
+            MENSAJE.textContent = '';
+
+            respuestaCorrecta = generarNumeroAleatorio(1, 8);
+            const objetoSeleccionado = OBJETOS_DISPONIBLES[generarNumeroAleatorio(0, OBJETOS_DISPONIBLES.length - 1)];
+
+            for (let i = 0; i < respuestaCorrecta; i++) {
+                const span = document.createElement('span');
+                span.className = 'objeto-conteo';
+                span.textContent = objetoSeleccionado;
+                AREA_CONTEO.appendChild(span);
+            }
+
+            let opciones = [respuestaCorrecta];
+
+            while (opciones.length < 4) {
+                let opcionIncorrecta = generarNumeroAleatorio(1, 8);
+                if (!opciones.includes(opcionIncorrecta)) {
+                    opciones.push(opcionIncorrecta);
+                }
+            }
+
+            opciones.sort(() => Math.random() - 0.5);
+
+            opciones.forEach(numero => {
+                const boton = document.createElement('button');
+                boton.textContent = numero;
+                boton.onclick = () => verificarRespuesta(numero);
+                OPCIONES_NUMEROS.appendChild(boton);
+            });
+        }
+
+        function verificarRespuesta(numeroSeleccionado) {
+            if (numeroSeleccionado === respuestaCorrecta) {
+                MENSAJE.textContent = '¡Correcto! 🎉 Ganaste 1 Semilla de Conocimiento.';
+                MENSAJE.style.color = '#2e8b57';
+                setTimeout(iniciarDesafio, 2000); 
+            } else {
+                MENSAJE.textContent = '¡Incorrecto! 🙁 Intenta contar de nuevo.';
+                MENSAJE.style.color = '#ff6347';
+            }
+        }
+
+        iniciarDesafio();
+    </script>
+
+</body>
+</html>

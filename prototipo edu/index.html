@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aventura Aprendizaje - Mapa de la Comunidad</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos basados en la propuesta: Colores brillantes, amigables */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #79d7d7; /* Cielo Azul/Verde */
+            color: #333;
+            min-height: 100vh;
+        }
+
+        #contenedor-principal {
+            background-color: #f7f3e8; /* Fondo de mapa claro */
+            border-radius: 20px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            margin: 30px;
+            max-width: 900px;
+            width: 95%;
+            position: relative;
+        }
+
+        h1 {
+            color: #ff6347; /* Título llamativo */
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        /* Área de Recompensa y Moneda (parte superior) */
+        #barra-progreso {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2e8b57;
+            border-bottom: 2px solid #a9a9a9;
+            margin-bottom: 20px;
+        }
+
+        #contador-semillas i {
+            color: #ffd700; /* Color de la moneda */
+            margin-right: 5px;
+        }
+
+        #jardin-virtual {
+            background-color: #e0f2f1; /* Fondo suave para la zona de construcción */
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #jardin-virtual:hover {
+            background-color: #b2dfdb;
+        }
+
+        /* Mapa de la Comunidad - Navegación (Iconos grandes) */
+        #mapa-comunidad {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .area-aprendizaje {
+            background-color: #ffffff;
+            border: 4px solid #ffaa00; /* Borde de contraste */
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .area-aprendizaje:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .area-aprendizaje i {
+            font-size: 4em; /* Iconos grandes */
+            margin-bottom: 10px;
+            color: #3cb371; /* Color principal de los íconos */
+        }
+
+        .area-aprendizaje h2 {
+            font-size: 1.2em;
+            margin: 5px 0 0;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="contenedor-principal">
+        <h1>Mapa de la Aventura Aprendizaje 🗺️</h1>
+
+        <div id="barra-progreso">
+            <div id="contador-semillas">
+                <i class="fas fa-leaf"></i> Semillas de Conocimiento: <span id="semillas-count">15</span>
+            </div>
+            <div id="jardin-virtual" onclick="mostrarProgreso()">
+                <i class="fas fa-home"></i> Mi Jardín de Aprendizaje
+            </div>
+        </div>
+
+        <div id="mapa-comunidad">
+            
+            <div class="area-aprendizaje" onclick="cargarMiniJuego('lenguaje')">
+                <i class="fas fa-pencil-alt"></i>
+                <h2>Lenguaje y Letras</h2>
+                <p>Rompecabezas de Letras</p>
+            </div>
+
+            <div class="area-aprendizaje" onclick="cargarMiniJuego('matematicas')">
+                <i class="fas fa-sort-numeric-up"></i>
+                <h2>Matemáticas</h2>
+                <p>Cosecha y Cuenta</p>
+            </div>
+
+            <div class="area-aprendizaje" onclick="cargarMiniJuego('natural')">
+                <i class="fas fa-tree"></i>
+                <h2>Clasifica el Entorno</h2>
+                <p>Medio Natural</p>
+            </div>
+
+            <div class="area-aprendizaje" onclick="cargarMiniJuego('memoria')">
+                <i class="fas fa-brain"></i>
+                <h2>Super Cerebrito</h2>
+                <p>Juegos de Memoria</p>
+            </div>
+        </div>
+
+        <p style="text-align: right; margin-top: 30px;">
+            <button onclick="interfazProfesor()" style="background-color: #3b5998; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                <i class="fas fa-user-tie"></i> Acceso Profesor
+            </button>
+        </p>
+
+    </div>
+
+    <script>
+        // JavaScript simple para simular la navegación y progresión.
+
+        function cargarMiniJuego(juego) {
+            alert("¡Iniciando Mini-Juego: " + juego.toUpperCase() + "! Aquí cargaría la pantalla de juego.");
+            // En la versión final, esta función cargaría el contenido del juego (como el código JS del "Cosecha y Cuenta").
+        }
+
+        function mostrarProgreso() {
+            alert("¡Jardín de Aprendizaje! Usa tus Semillas de Conocimiento para construir estructuras y ver tu progreso.");
+            // En la versión final, se mostraría una interfaz de construcción/personalización.
+        }
+
+        function interfazProfesor() {
+            alert("Acceso de Profesor. Aquí puedes personalizar el Pénsum, revisar el progreso y la dificultad de los niveles.");
+            // En la versión final, se requeriría una contraseña y se mostraría un panel de control.
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Navbar */
+    nav {
+      position: sticky; /* Se queda fijo arriba */
+      top: 0;
+      background-color: #333;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+    }
+
+    nav a:hover {
+      background-color: #555;
+    }
+
+    /* Contenido */
+    .content {
+      padding: 2rem;
+    }
+
+    .section {
+      display: none; /* Ocultamos por defecto */
+      animation: fade 0.3s ease-in-out;
+    }
+
+    .section.active {
+      display: block; /* Mostramos la activa */
+    }
+
+    @keyframes fade {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a onclick="mostrarSeccion('home')">Inicio</a>
+    <a onclick="mostrarSeccion('nosotros')">Nosotros</a>
+    <a onclick="mostrarSeccion('contacto')">Contacto</a>
+  </nav>
+
+  <!-- CONTENIDO -->
+  <div class="content">
+    <!-- Sección Inicio -->
+    <div id="home" class="section active">
+      <h1>Bienvenido a la página de inicio</h1>
+      <p> esta página encontraras todo lo relacionado a páginas web.</p>
+    </div>
+
+    <!-- Sección Nosotros -->
+    <div id="nosotros" class="section">
+      <h1>Sobre nosotros</h1>
+      <p>Somos una Empresa que se encarga de la creacion de páginas web.</p>
+    </div>
+
+    <!-- Sección Contacto -->
+    <div id="contacto" class="section">
+      <h1>Contáctanos</h1>
+      <p> puedes contactarnos atraves del numero:5421-3514.</p>
+      
+    </div>
+  </div>
+
+  <!-- SCRIPT PARA CAMBIAR SECCIONES -->
+  <script>
+    function mostrarSeccion(id) {
+      // Oculta todas las secciones
+      document.querySelectorAll('.section').forEach(function(seccion) {
+        seccion.classList.remove('active');
+      });
+      // Muestra solo la seleccionada
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
